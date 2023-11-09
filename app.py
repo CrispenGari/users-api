@@ -4,6 +4,12 @@ from app import app
 # from blueprints.todo import blueprint as todo
 
 
+class Config:
+    DEBUG = False
+    HOST = "0.0.0.0"
+    PORT = 1234
+
+
 @app.route("/", methods=["GET", "POST"])
 def hi():
     return "Hi there", 200
@@ -15,4 +21,4 @@ def hi():
 if __name__ == "__main__":
     # with app.app_context():
     #     db.create_all()
-    app.run(port=1234, debug=True)
+    app.run(host=Config.HOST, port=Config.PORT, debug=Config.DEBUG)
