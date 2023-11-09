@@ -1,9 +1,8 @@
 from flask import Flask
 
-app = Flask(__name__)
-
-# from blueprints.user import blueprint as user
-# from blueprints.todo import blueprint as todo
+from app import app, db
+from blueprints.user import blueprint as user
+from blueprints.todo import blueprint as todo
 
 
 class Config:
@@ -17,10 +16,10 @@ def hi():
     return "Hi there", 200
 
 
-# app.register_blueprint(user, url_prefix="/users")
-# app.register_blueprint(todo, url_prefix="/todos")
+app.register_blueprint(user, url_prefix="/users")
+app.register_blueprint(todo, url_prefix="/todos")
 
 if __name__ == "__main__":
-    # with app.app_context():
-    #     db.create_all()
-    app.run(host=Config.HOST, port=Config.PORT, debug=Config.DEBUG)
+    with app.app_context():
+        db.create_all()
+    app.run(host=Config.HOST, port=Config.PORT, debug=Config.DEBUG, use_reloader=False)
