@@ -21,4 +21,4 @@ def hi():
 if __name__ == "__main__":
     # with app.app_context():
     #     db.create_all()
-    app.run(host=Config.HOST, port=Config.PORT, debug=Config.DEBUG)
+    app.run(host=Config.HOST, port=Config.PORT, debug=Config.DEBUG, use_reloader=False)
